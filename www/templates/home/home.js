@@ -1,11 +1,12 @@
 'Use Strict';
-angular.module('App').controller('homeController', function ($scope, $state,$cordovaOauth, $localStorage, $log, $location,$http,$ionicPopup, $firebaseObject, $firebaseAuth, Auth, FURL, Utils) {
+angular.module('starter').controller('homeController', function ($scope, $state,$cordovaOauth, $localStorage, $log, $location,$http,$ionicPopup, $firebaseObject, $firebaseAuth, Auth, FURL, Utils) {
   var ref = firebase.database().ref();
   $scope.authObj = $firebaseAuth();
 
   $scope.logOut = function () {
-      Auth.logout();
-      $location.path("/login");
+      Auth.logout().then(function(info){
+        console.log(info);
+      });
   }
   
   $scope.profile = function () {

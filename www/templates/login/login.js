@@ -1,5 +1,6 @@
 'Use Strict';
-angular.module('App').controller('loginController', function ($scope, $state,$cordovaOauth, $localStorage, $location,$http,$ionicPopup,$firebaseAuth, $firebaseObject,$log, Auth, FURL, Utils) {
+angular.module('starter').controller('loginController', function ($scope, $window,$state,$cordovaOauth, $localStorage,$http,$ionicPopup,$firebaseAuth, $firebaseObject,$log, Auth, FURL, Utils) {
+  console.log('login controller');
   var auth = $firebaseAuth();
   var ref = firebase.database().ref();
   var userkey = "";
@@ -12,7 +13,7 @@ angular.module('App').controller('loginController', function ($scope, $state,$co
       
       $log.log("id del usuario:" + authData);
       Utils.hide();
-      $state.go('home');
+      $state.go("tab.games");
       $log.log("Starter page","Home");
 
       }, function(err) {
@@ -28,7 +29,7 @@ angular.module('App').controller('loginController', function ($scope, $state,$co
     auth.$signInAnonymously().then(function(firebaseUser) {
      console.log("Signed in as:", firebaseUser.uid);
      Utils.hide();
-     $location.path("/home");
+     $state.go("tab.games");
     }).catch(function(error) {
       console.error("Authentication failed:", error);
     });
@@ -39,90 +40,21 @@ angular.module('App').controller('loginController', function ($scope, $state,$co
     var firebaseUser = auth.$getAuth();
 
     if (firebaseUser) {
-    $log.log("Signed in as:", firebaseUser.uid);
-    $location.path("/home");
+      $log.log("Signed in as:", firebaseUser.uid);
+      userStatus(firebaseUser);
+      $state.go("tab.games");
     } else {
-    $log.log("Signed out");
-    $location.path("/login");
+      $log.log("Signed out");
+      userStatus(firebaseUser);
+      $state.go("login");
     }
-
   }
-  
-/* SEEMS NOT WORKING WELL
 
-  $scope.loginWithGoogle =  function(){
-  var provider = new firebase.auth.GoogleAuthProvider();
-
- firebase.auth().signInWithPopup(provider).then(function(result) {
-
-    $log.log("Authenticated successfully with payload:", angular.toJson(result));
-    $state.go('home');
-  
-  })
-  .catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-  $log.error("error:", angular.toJson(error));
-});
-  ;
-  };
-
-*/
-
-/* SEEMS NOT WORKING WELL
-  $scope.loginWithFacebook =  function(){
-    var provider = new firebase.auth.FacebookAuthProvider();
-
- firebase.auth().signInWithPopup(provider).then(function(result) {
-
-    $log.log("Authenticated successfully with payload:", angular.toJson(result));
-    $state.go('home');
-  
-  })
-  .catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-  $log.error("error:", angular.toJson(error));
-});
-  ;
-  };
-  */
-  
-/* SEEMS NOT WORKING WELL
-  $scope.loginWithTwitter =  function(){
-    var provider = new firebase.auth.FacebookAuthProvider();
-
- firebase.auth().signInWithPopup(provider).then(function(result) {
-
-    $log.log("Authenticated successfully with payload:", angular.toJson(result));
-    $state.go('home');
-  
-  })
-  .catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-  $log.error("error:", angular.toJson(error));
-});
-  ;
-  };
-*/
-
+  function userStatus(user) {
+    if (user) {
+      return $window.localStorage.userOnline = true;
+    }else{
+      return $window.localStorage.userOnline = false;
+    }
+  }
 });

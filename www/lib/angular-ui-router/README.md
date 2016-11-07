@@ -47,7 +47,7 @@ When you're done, your setup should look similar to the following:
 >
 ```html
 <!doctype html>
-<html ng-app="myApp">
+<html ng-app="starter">
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
     <script src="js/angular-ui-router.min.js"></script>

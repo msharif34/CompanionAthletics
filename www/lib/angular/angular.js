@@ -1515,7 +1515,7 @@ function getNgAttribute(element, ngAttr) {
  *
  <example ng-app-included="true">
    <file name="index.html">
-   <div ng-app="ngAppStrictDemo" ng-strict-di>
+   <div ng-app="starter" ng-strict-di>
        <div ng-controller="GoodController1">
            I can add: {{a}} + {{b}} =  {{ a+b }}
 

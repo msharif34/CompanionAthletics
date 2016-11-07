@@ -1,6 +1,6 @@
 
 'Use Strict';
-angular.module('starter', ['ionic','ngStorage', 'starter.controllers', 'ngCordova','firebase', 'pascalprecht.translate','ngMessages'])
+angular.module('starter', ['ionic','ngStorage', 'starter.controllers', 'ngCordova','firebase', 'pascalprecht.translate','ngMessages', 'ui.router'])
 .config(function($stateProvider, $urlRouterProvider, $translateProvider, $translateStaticFilesLoaderProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -27,67 +27,65 @@ $translateProvider.useStaticFilesLoader({
 
   // Each tab has its own nav history stack:
 
-  // .state('tab.games', {
-  //   url: '/games',
-  //   views: {
-  //     'tab-games': {
-  //       templateUrl: 'templates/tab-games.html',
-  //       controller: 'GamesCtrl'
-  //     }
-  //   }
-  // })
-  //
-  // .state('tab.news', {
-  //     url: '/news',
-  //     views: {
-  //       'tab-news': {
-  //         templateUrl: 'templates/tab-news.html',
-  //         controller: 'NewsCtrl'
-  //       }
-  //     }
-  //   })
-  //   .state('tab.videos', {
-  //     url: '/videos',
-  //     views: {
-  //       'tab-videos': {
-  //         templateUrl: 'templates/tab-videos.html',
-  //         controller: 'VideosCtrl'
-  //       }
-  //     }
-  //   })
-  //
-  // .state('tab.standings', {
-  //   url: '/standings',
-  //   views: {
-  //     'tab-standings': {
-  //       templateUrl: 'templates/tab-standings.html',
-  //       controller: 'StandingsCtrl'
-  //     }
-  //   }
-  // })
-
-  .state('login', {
-      url: '/login',
+  .state('tab.games', {
+    url: '/games',
+    views: {
+      'tab-games': {
+        templateUrl: 'templates/tab-games.html',
+        controller: 'GamesCtrl'
+      }
+    }
+  })
+  
+  .state('tab.news', {
+      url: '/news',
       views: {
-        templateUrl: 'templates/login.html',
-        controller:'loginController'
+        'tab-news': {
+          templateUrl: 'templates/tab-news.html',
+          controller: 'NewsCtrl'
+        }
       }
     })
-    // .state('forgot', {
-    //   url: '/forgot',
-    //   templateUrl: 'templates/forgot/forgot.html',
-    //   controller:'forgotController'
-    // })
-    // .state('register', {
-    //   url: '/register',
-    //   templateUrl: 'templates/register/register.html',
-    //   controller:'registerController'
-    // })
-    // .state('home', {
-    //   url: '/home',
-    //   templateUrl: 'templates/home/home.html',
-    //   controller:'homeController'
-    // });
+    .state('tab.videos', {
+      url: '/videos',
+      views: {
+        'tab-videos': {
+          templateUrl: 'templates/tab-videos.html',
+          controller: 'VideosCtrl'
+        }
+      }
+    })
+  
+  .state('tab.standings', {
+    url: '/standings',
+    views: {
+      'tab-standings': {
+        templateUrl: 'templates/tab-standings.html',
+        controller: 'StandingsCtrl'
+      }
+    }
+  })
+
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/tab-login.html',
+      controller: 'loginController'
+    })
+    .state('forgot', {
+      url: '/forgot',
+      templateUrl: 'templates/forgot/forgot.html',
+      controller:'forgotController'
+    })
+    .state('register', {
+      url: '/register',
+      templateUrl: 'templates/register/register.html',
+      controller:'registerController'
+    })
+    .state('home', {
+      url: '/home',
+      templateUrl: 'templates/home/home.html',
+      controller:'homeController'
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
@@ -101,10 +99,22 @@ $translateProvider.useStaticFilesLoader({
     storageBucket: "ca-app-6597a.appspot.com"
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $state, $window) {
   $ionicPlatform.ready(function(FURL) {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    var currentUser = $window.localStorage.userOnline;
+    function isOnline(user) {
+      console.log('user is: ', user)
+     if(user === false){
+        $state.go('login');
+      }else{
+        $state.go('tab.games');
+      }
+    };
+
+    // isOnline(currentUser);
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
