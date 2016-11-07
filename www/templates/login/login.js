@@ -71,7 +71,6 @@ angular.module('starter').controller('loginController', function ($scope, $windo
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
         // ...
-        $state.go("tab.games")
       }
       // The signed-in user info.
       var user = result.user;
