@@ -1,11 +1,12 @@
 {
     "LOGIN": {
-        "text_title": "Firebase 3 Starter",
+        "text_title": "Login",
         "login_title": "Sign in",
         "email_field": "Email",
         "pass_field": "Password",
         "signin_message": "Login",
-        "signinanon_message": "Login as Anonymous",
+        "signin_anon": "Login as Anonymous",
+        "signInFb": "Login with Facebook",
         "forgot_message": "Forgot Password?",
         "join_message": "Register"
     },

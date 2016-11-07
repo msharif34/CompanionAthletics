@@ -6,7 +6,8 @@
   </ion-nav-bar>
         <ion-content class="padding-top">
           <div class="list text-center padding">
-            <i class="icon ion-ios-game-controller-b larger positive"></i>
+            <!-- <i class="icon ion-ios-game-controller-b larger positive"></i> -->
+          <img class="icon larger positive" src="img/CA-logo.png" style="max-height: 200px;">
           </div>
           <form novalidate name="loginForm" ng-submit="loginForm.$valid && signIn(user)">
           <div class="list">
@@ -40,13 +41,14 @@
           </div>
           <div class="padding-top">
             <input type="submit" class="button button-block button-positive" value="{{ 'LOGIN.signin_message' | translate }}">
-            <a ng-click="signInAnon()" class="button button-block button-positive">{{ 'LOGIN.signinanon_message' | translate }}</a>
+            <!-- <a ng-click="signInAnon()" class="button button-block button-positive">{{ 'LOGIN.signin_anon' | translate }}</a> -->
+            <a ng-click="signInfb()" class="button button-block button-positive">{{ 'LOGIN.signInFb' | translate }}</a>
             <p class="text-center padding-top">
                 <a href="#/forgot" class="button button-clear button-positive">{{ 'LOGIN.forgot_message' | translate }}</a><a href="#/register" class="button button-clear button-positive">{{ 'LOGIN.join_message' | translate }}</a>
             </p>
             <!-- TODO -->
             <!--
-            <p class="text-center padding"> 
+            <p class="text-center padding">
               Login with:
                 <i ng-click="loginWithFacebook()" class="icon padding medium ion-social-facebook positive"></i><i ng-click="loginWithGoogle()" class="icon padding medium ion-social-google positive"></i><i ng-click="loginWithTwitter()" class="icon padding medium ion-social-twitter positive"></i>
             </p>

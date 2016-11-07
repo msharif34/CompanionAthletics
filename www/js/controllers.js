@@ -5,12 +5,12 @@ console.log('working');
 
 })
 
-.controller('NewsCtrl', function($scope, Chats) {
+.controller('NewsCtrl', function($scope) {
 
 })
 
-.controller('VideosCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('VideosCtrl', function($scope, $stateParams) {
+
 })
 
 .controller('StandingsCtrl', function($scope) {

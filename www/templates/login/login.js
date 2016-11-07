@@ -10,7 +10,7 @@ angular.module('starter').controller('loginController', function ($scope, $windo
     Utils.show();
     Auth.login(user)
       .then(function(authData) {
-      
+
       $log.log("id del usuario:" + authData);
       Utils.hide();
       $state.go("tab.games");
@@ -33,7 +33,7 @@ angular.module('starter').controller('loginController', function ($scope, $windo
     }).catch(function(error) {
       console.error("Authentication failed:", error);
     });
-    
+
   };
 
   $scope.checkUser = function () {
@@ -52,9 +52,41 @@ angular.module('starter').controller('loginController', function ($scope, $windo
 
   function userStatus(user) {
     if (user) {
+      console.log('user logged in');
       return $window.localStorage.userOnline = true;
     }else{
+      console.log('user logged out');
       return $window.localStorage.userOnline = false;
     }
+  }
+  $scope.signInfb = function () {
+    var provider = new firebase.auth.FacebookAuthProvider();
+
+    provider.addScope('user_birthday');
+
+    firebase.auth().signInWithRedirect(provider);
+
+    firebase.auth().getRedirectResult().then(function(result) {
+      if (result.credential) {
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        var token = result.credential.accessToken;
+        // ...
+        $state.go("tab.games")
+      }
+      // The signed-in user info.
+      var user = result.user;
+      console.log(user);
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+
+      console.log("error occurred: " + error)
+    });
   }
 });

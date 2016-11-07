@@ -5,7 +5,7 @@
         "email_field": "Email",
         "pass_field": "Password",
         "signin_message": "Ingresar",
-        "signinanon_message": "Ingresar como Anonimo",
+        "signin_anon": "Ingresar como Anonimo",
         "forgot_message": "Olvido Password?",
         "join_message": "Registrarse"
     },
