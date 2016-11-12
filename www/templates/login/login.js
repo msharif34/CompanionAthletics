@@ -71,7 +71,7 @@ function checkLoginState(event) {
     // User is signed-in Facebook.
     console.log(event.authResponse)
     var credential = firebase.auth.FacebookAuthProvider.credential(event.authResponse.accessToken);
-    
+
     firebase.auth().signInWithCredential(credential).then(function(info){
           $state.go('tab.games');
         }).catch(function(error) {

@@ -2,20 +2,20 @@
   <ion-content class="padding games">
     <ion-list>
       <h4 class="text-center">Senior League <span class="ion-ios-basketball"></span></h4>
-      <ion-item class="item-margin">
+      <ion-item class="item-margin" ng-repeat="team in schedule | limitTo: 10">
         <div class="row text-center">
           <div class="col col-33">
-            Brotherhood
+            {{team.team1}}
           </div>
           <div class="col col-33">
               4pm
           </div>
           <div class="col col-33">
-            OBK
+            {{team.team2}}
           </div>
         </div>
       </ion-item>
-      <ion-item class="item-margin">
+      <!-- <ion-item class="item-margin">
         <div class="row text-center">
           <div class="col col-33">
               Kent
@@ -80,7 +80,7 @@
             OCC
           </div>
         </div>
-      </ion-item>
+      </ion-item> -->
   </ion-list>
   </ion-content>
 </ion-view>

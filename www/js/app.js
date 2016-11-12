@@ -36,7 +36,7 @@ $translateProvider.useStaticFilesLoader({
       }
     }
   })
-  
+
   .state('tab.news', {
       url: '/news',
       views: {
@@ -55,7 +55,7 @@ $translateProvider.useStaticFilesLoader({
         }
       }
     })
-  
+
   .state('tab.standings', {
     url: '/standings',
     views: {
@@ -88,7 +88,7 @@ $translateProvider.useStaticFilesLoader({
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/tab/news');
 
 })
 // Changue this for your Firebase App URL.
