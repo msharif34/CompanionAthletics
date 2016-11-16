@@ -1,27 +1,7 @@
 <ion-view view-title="Videos">
   <ion-content class="padding">
     <ion-list>
-        <!-- <div class="card">
-            <ion-item>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/wyVM1evRxNw" frameborder="0" width="560" height="315"></iframe>
-                </div>
-            </ion-item>
-        </div>
-        <div class="card">
-            <ion-item>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/gvI2ClWqHO0" frameborder="0" width="560" height="315"></iframe>
-                </div>
-            </ion-item>
-        </div>
-        <div class="card">
-            <ion-item>
-                <div class="video-container">
-                    <iframe src="http://www.youtube.com/embed/uJAWaE11Jf4" frameborder="0" width="560" height="315"></iframe>
-                </div>
-            </ion-item>
-        </div> -->
+    <div ng-repeat="video in videos">
         <div class="list card">
           <div class="item item-avatar">
             <img src="img/CA-logo.png">
@@ -30,7 +10,7 @@
           </div>
           <div class="item item-body">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/V3a8wahoXSw" frameborder="0" width="560" height="315"></iframe>
+                <iframe src="video.source" frameborder="0" width="560" height="315"></iframe>
             </div>
             <p>Watch our documentary</p>
             <p>
@@ -51,6 +31,7 @@
             </a>
           </div>
         </div>
+    </div>
     </ion-list>
   </ion-content>
 </ion-view>

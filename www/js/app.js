@@ -42,7 +42,7 @@ $translateProvider.useStaticFilesLoader({
       views: {
         'tab-news': {
           templateUrl: 'templates/tab-news.html',
-          controller: 'NewsCtrl'
+          controller: 'MainCtrl'
         }
       }
     })
@@ -51,7 +51,7 @@ $translateProvider.useStaticFilesLoader({
       views: {
         'tab-videos': {
           templateUrl: 'templates/tab-videos.html',
-          controller: 'VideosCtrl'
+          controller: 'MainCtrl'
         }
       }
     })

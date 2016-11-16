@@ -8,15 +8,17 @@
           <p>News and Updates</p>
         </div>
         <div class="item item-body">
-          <img class="full-image" src="{{item.full_picture}}">
-          <p>Companion Athletics player of the week high school Toto Mohamed 28 pts 4 ast Class Of '19</p>
+          <img class="full-image" src="{{item.full_picture}}" style="max-height: 150px;" 
+          ng-if="item.full_picture">
+          <img class="full-image text-center" src="img/CA-logo.png" style="max-height: 150px; max-width: 75%; float:middle;" 
+          ng-if="!item.full_picture">
+          <p>{{item.message}}</p>
           <p>
-            <a href="#" class="subdued">1 Like</a>
-            <a href="#" class="subdued">3 Comments</a>
-            <a href="#" class="subdued">8 Share</a>
+            <a href="#" class="subdued" ng-if="item.likes.data.length">{{item.likes.data.length}} Likes</a>
+            <a href="#" class="subdued" ng-if="item.shares.count">{{item.shares.count}} Shares</a>
           </p>
         </div>
-        <div class="item tabs tabs-secondary tabs-icon-left">
+        <!-- <div class="item tabs tabs-secondary tabs-icon-left">
           <a class="tab-item" href="#">
             <i class="icon ion-thumbsup"></i> Like
           </a>
@@ -26,7 +28,7 @@
           <a class="tab-item" href="#">
             <i class="icon ion-share"></i> Share
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </ion-content>

@@ -36,7 +36,9 @@ angular.module('starter.controllers', [])
   $scope.schedule = schedule;
 })
 
-.controller('NewsCtrl', function($scope, $rootScope) {
+.controller('MainCtrl', function($scope, $rootScope) {
+$scope.videos = [];
+  $scope.data = [];
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1231723483550971',
@@ -44,16 +46,45 @@ angular.module('starter.controllers', [])
       version    : 'v2.8'
     });
     FB.AppEvents.logPageView();
+
+FB.api(
+    "819213538129523?fields=videos{source, format}",
+    {
+        "access_token": ""
+
+    },
+    function (response) {
+      if (response && !response.error) {
+        /* handle the result */
+        // console.log(JSON.stringify(response, null, 2));
+
+        response["videos"].data.forEach(function(val, index, arr) {
+            // console.log(JSON.stringify(arr[index].status_type, null, 2))
+        console.log('-----------------------')
+        console.log(JSON.stringify(arr[index], null, 2));
+        $scope.videos.push(arr[index]);
+            
+          })
+      }
+    }
+);
+
+    
     FB.api(
       '/819213538129523',
       'GET',
       {
-        "fields":"posts{full_picture,message,created_time}",
+        "fields":"posts{full_picture,message,created_time,shares,status_type,likes}",
         "access_token": ""
     }, function(response) {
-          // Insert your code here
-          $scope.data = response.posts.data;
-          // console.log(JSON.stringify(response, null, 2))
+          var data = response.posts.data;
+          data.forEach(function(val, index, arr) {
+            // console.log(JSON.stringify(arr[index].status_type, null, 2))
+            if(arr[index].status_type !== "added_video"){
+              $scope.data.push(arr[index])
+              // console.log("found it")
+            }
+          })
       });
   };
 })
