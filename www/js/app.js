@@ -99,37 +99,16 @@ $translateProvider.useStaticFilesLoader({
     storageBucket: "ca-app-6597a.appspot.com"
 })
 
-.run(function($ionicPlatform, $state, $window, $firebaseAuth, $log) {
+.run(function($ionicPlatform, $state, $window, $firebaseAuth, $log, $rootScope) {
   $ionicPlatform.ready(function(FURL) {
-    var auth = $firebaseAuth();
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    var checkUser = function () {
-      var firebaseUser = auth.$getAuth();
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
-      if (firebaseUser) {
-        $log.log("Signed in as:", firebaseUser.uid);
-        userStatus(firebaseUser);
-        $state.go("tab.games");
-      } else {
-        $log.log("Signed out");
-        userStatus(firebaseUser);
-        $state.go("login");
-      }
-  }
-
-    function userStatus(user) {
-    if (user) {
-      console.log('user logged in');
-      // return $window.localStorage.userOnline = true;
-    }else{
-      console.log('user logged out');
-      // return $window.localStorage.userOnline = false;
-    }
-  }
-
-    checkUser();
-    // isOnline(currentUser);
 
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

@@ -36,8 +36,26 @@ angular.module('starter.controllers', [])
   $scope.schedule = schedule;
 })
 
-.controller('NewsCtrl', function($scope) {
-
+.controller('NewsCtrl', function($scope, $rootScope) {
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1231723483550971',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+    FB.api(
+      '/819213538129523',
+      'GET',
+      {
+        "fields":"posts{full_picture,message,created_time}",
+        "access_token": ""
+    }, function(response) {
+          // Insert your code here
+          $scope.data = response.posts.data;
+          // console.log(JSON.stringify(response, null, 2))
+      });
+  };
 })
 
 .controller('VideosCtrl', function($scope, $stateParams) {
