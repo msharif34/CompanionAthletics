@@ -10,25 +10,12 @@
           </div>
           <div class="item item-body">
             <div class="video-container">
-                <iframe src="video.source" frameborder="0" width="560" height="315"></iframe>
+              <div ng-bind-html="video.format[0].embed_html | unsafe"></div>
             </div>
-            <p>Watch our documentary</p>
+            <p>{{video.description}}</p>
             <p>
-              <a href="#" class="subdued">1 Like</a>
-              <a href="#" class="subdued">3 Comments</a>
-              <a href="#" class="subdued">8 Share</a>
+              <a href="#" class="subdued">{{video.likes.data.length}} Likes</a>
             </p>
-          </div>
-          <div class="item tabs tabs-secondary tabs-icon-left">
-            <a class="tab-item" href="#">
-              <i class="icon ion-thumbsup"></i> Like
-            </a>
-            <a class="tab-item" href="#">
-              <i class="icon ion-chatbox"></i> Comment
-            </a>
-            <a class="tab-item" href="#">
-              <i class="icon ion-share"></i> Share
-            </a>
           </div>
         </div>
     </div>

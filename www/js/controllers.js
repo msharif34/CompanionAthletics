@@ -36,10 +36,15 @@ angular.module('starter.controllers', [])
   $scope.schedule = schedule;
 })
 
-.controller('MainCtrl', function($scope, $rootScope) {
+.controller('MainCtrl', function($scope, $rootScope, $ionicLoading) {
 $scope.videos = [];
   $scope.data = [];
   window.fbAsyncInit = function() {
+
+    $ionicLoading.show({
+      template: '<ion-spinner icon="android"></ion-spinner>'
+    });
+
     FB.init({
       appId      : '1231723483550971',
       xfbml      : true,
@@ -48,34 +53,27 @@ $scope.videos = [];
     FB.AppEvents.logPageView();
 
 FB.api(
-    "819213538129523?fields=videos{source, format}",
+    "819213538129523?fields=videos{source,format,length,created_time,likes,description}",
     {
-        "access_token": ""
+        "access_token": "1231723483550971|Bhq_LE_WIqVpEKrBaNy_0yTRoew"
 
     },
     function (response) {
       if (response && !response.error) {
-        /* handle the result */
-        // console.log(JSON.stringify(response, null, 2));
-
         response["videos"].data.forEach(function(val, index, arr) {
-            // console.log(JSON.stringify(arr[index].status_type, null, 2))
-        console.log('-----------------------')
-        console.log(JSON.stringify(arr[index], null, 2));
-        $scope.videos.push(arr[index]);
-            
-          })
+          $scope.videos.push(arr[index]);
+        })
       }
     }
 );
 
-    
+
     FB.api(
       '/819213538129523',
       'GET',
       {
         "fields":"posts{full_picture,message,created_time,shares,status_type,likes}",
-        "access_token": ""
+        "access_token": "1231723483550971|Bhq_LE_WIqVpEKrBaNy_0yTRoew"
     }, function(response) {
           var data = response.posts.data;
           data.forEach(function(val, index, arr) {
@@ -84,13 +82,42 @@ FB.api(
               $scope.data.push(arr[index])
               // console.log("found it")
             }
-          })
+          });
+          $ionicLoading.hide();
       });
   };
 })
 
-.controller('VideosCtrl', function($scope, $stateParams) {
+.controller('VideosCtrl', function($scope, $stateParams, $ionicLoading) {
+  console.log('here')
+  $scope.videos = [];
+  window.fbAsyncInit = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="android"></ion-spinner>'
+    });
 
+    FB.init({
+      appId      : '1231723483550971',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+
+    FB.api(
+        "819213538129523?fields=videos{source,format,length,created_time,likes,description}",
+        {
+            "access_token": "1231723483550971|Bhq_LE_WIqVpEKrBaNy_0yTRoew"
+
+        },
+        function (response) {
+          if (response && !response.error) {
+            response["videos"].data.forEach(function(val, index, arr) {
+              $scope.videos.push(arr[index]);
+            })
+          }
+        }
+    );
+  };
 })
 
 .controller('StandingsCtrl', function($scope) {

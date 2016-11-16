@@ -51,7 +51,7 @@ $translateProvider.useStaticFilesLoader({
       views: {
         'tab-videos': {
           templateUrl: 'templates/tab-videos.html',
-          controller: 'MainCtrl'
+          controller: 'VideosCtrl'
         }
       }
     })
@@ -117,4 +117,13 @@ $translateProvider.useStaticFilesLoader({
       StatusBar.styleDefault();
     }
   });
+})
+
+.filter('unsafe', function($sce, $ionicLoading) {
+  $ionicLoading.hide();
+  return $sce.trustAsHtml;
+})
+.filter('timeFormat', function(time) {
+  var date = new Date(time)
+  return date;
 });
