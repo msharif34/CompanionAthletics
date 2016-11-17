@@ -36,56 +36,18 @@ angular.module('starter.controllers', [])
   $scope.schedule = schedule;
 })
 
-.controller('MainCtrl', function($scope, $rootScope, $ionicLoading) {
-$scope.videos = [];
+.controller('MainCtrl', function($scope, $rootScope, $ionicLoading, Api) {
   $scope.data = [];
-  window.fbAsyncInit = function() {
+  var data = Api.getNews();
 
-    $ionicLoading.show({
-      template: '<ion-spinner icon="android"></ion-spinner>'
-    });
-
-    FB.init({
-      appId      : '1231723483550971',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-    FB.AppEvents.logPageView();
-
-FB.api(
-    "819213538129523?fields=videos{source,format,length,created_time,likes,description}",
-    {
-        "access_token": "1231723483550971|Bhq_LE_WIqVpEKrBaNy_0yTRoew"
-
-    },
-    function (response) {
-      if (response && !response.error) {
-        response["videos"].data.forEach(function(val, index, arr) {
-          $scope.videos.push(arr[index]);
-        })
-      }
-    }
-);
-
-
-    FB.api(
-      '/819213538129523',
-      'GET',
-      {
-        "fields":"posts{full_picture,message,created_time,shares,status_type,likes}",
-        "access_token": "1231723483550971|Bhq_LE_WIqVpEKrBaNy_0yTRoew"
-    }, function(response) {
-          var data = response.posts.data;
-          data.forEach(function(val, index, arr) {
-            // console.log(JSON.stringify(arr[index].status_type, null, 2))
-            if(arr[index].status_type !== "added_video"){
-              $scope.data.push(arr[index])
-              // console.log("found it")
-            }
-          });
-          $ionicLoading.hide();
-      });
-  };
+  console.log(data)
+  // data.forEach(function(val, index, arr) {
+  //               // console.log(JSON.stringify(arr[index].status_type, null, 2))
+  //               if(arr[index].status_type !== "added_video"){
+  //                 $scope.data.push(arr[index])
+  //                 // console.log("found it")
+  //               }
+  //             });
 })
 
 .controller('VideosCtrl', function($scope, $stateParams, $ionicLoading) {

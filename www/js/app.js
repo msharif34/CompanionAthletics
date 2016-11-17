@@ -1,6 +1,6 @@
 
 'Use Strict';
-angular.module('starter', ['ionic','ngStorage', 'starter.controllers', 'ngCordova','firebase', 'pascalprecht.translate','ngMessages', 'ui.router'])
+angular.module('starter', ['ionic','ngStorage', 'starter.controllers', 'starter.services','ngCordova','firebase', 'pascalprecht.translate','ngMessages', 'ui.router'])
 .config(function($stateProvider, $urlRouterProvider, $translateProvider, $translateStaticFilesLoaderProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
