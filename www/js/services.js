@@ -1,38 +1,53 @@
 angular.module('starter.services', [])
 
-.factory('Api', function($ionicLoading) {
-  // Might use a resource here that returns a JSON array
-  var data;
-  return {
-    getNews: function(){
+.service('dataService', function($ionicLoading, $q) {
+  var info = [];
+
+  this.getNews = function(callback){
+    // $ionicLoading.show({
+    //   template: "Loading ..."
+    // });
+
       window.fbAsyncInit = function() {
-        // $ionicLoading.show({
-        //   template: '<ion-spinner icon="android"></ion-spinner>'
-        // });
         FB.init({
           appId      : '1231723483550971',
           xfbml      : true,
           version    : 'v2.8'
         });
         FB.AppEvents.logPageView();
-        
+
         FB.api(
           '/819213538129523',
           'GET',
           {
             "fields":"posts{full_picture,message,created_time,shares,status_type,likes}",
             "access_token": "1231723483550971|Bhq_LE_WIqVpEKrBaNy_0yTRoew"
-        }, function(response) {
-              var data = response.posts.data;
-              // console.log(data)
-              // $ionicLoading.hide();
+          }, function(response) {
+            var data = response.posts.data;
+            callback(data);
           });
-        console.log(data)
-        return data;
       };
-    }, 
-    getVideos: function(){
+  };
 
-    }
-  }
+  this.getVideos = function(callback){
+    // $ionicLoading.show({
+    //   template: "Loading ..."
+    // });
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1231723483550971',
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+
+      FB.AppEvents.logPageView();
+      FB.api("819213538129523?fields=videos{source,format,length,created_time,likes,description}",{"access_token": "1231723483550971|Bhq_LE_WIqVpEKrBaNy_0yTRoew"},
+        function (response) {
+          callback(response);
+        });
+      };
+  };
+
+  return this;
 });

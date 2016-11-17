@@ -42,7 +42,7 @@ $translateProvider.useStaticFilesLoader({
       views: {
         'tab-news': {
           templateUrl: 'templates/tab-news.html',
-          controller: 'MainCtrl'
+          controller: 'NewsCtrl'
         }
       }
     })
